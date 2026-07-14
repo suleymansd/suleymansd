@@ -1,5 +1,5 @@
 <h1 align="center">Merhaba, ben Süleyman 👋</h1>
-<h3 align="center">Software Developer · AI/SaaS Builder · CEO & Co-Founder @ Aparial Yazılım Teknolojileri</h3>
+<h3 align="center">Software Engineer · AI/SaaS Developer, Mobile App developer , project management · CEO & Co-Founder @ SvontAi </h3>
 
 <p align="center">
   <a href="https://www.linkedin.com/in/YOUR-LINKEDIN"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white"/></a>
