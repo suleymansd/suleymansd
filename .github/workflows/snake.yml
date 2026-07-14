@@ -1,18 +1,35 @@
-name: Generate Datas
+name: Generate 3D Contrib & Snake
 on:
-  schedule: # execute every 12 hours
-    - cron: "* */12 * * *"
+  schedule:
+    - cron: "0 */12 * * *"
   workflow_dispatch:
   push:
     branches:
-    - main
+      - main
 
 jobs:
-  build:
-    name: Jobs to update datas
+  # 3D Contribution Graph
+  contrib-3d:
+    name: Generate 3D Contribution Graph
     runs-on: ubuntu-latest
     steps:
-      # Snake Animation
+      - uses: actions/checkout@v4
+      - uses: yoshi389111/github-profile-3d-contrib@0.7.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          USERNAME: suleymansd
+      - name: Commit & Push
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email github-actions[bot]@users.noreply.github.com
+          git add -A .
+          git diff --quiet && git diff --staged --quiet || (git commit -m "generated 3d contrib" && git push)
+
+  # Snake Animation
+  snake:
+    name: Generate Snake Animation
+    runs-on: ubuntu-latest
+    steps:
       - uses: Platane/snk@v3
         with:
           github_user_name: suleymansd
@@ -21,9 +38,8 @@ jobs:
             dist/github-contribution-grid-snake-dark.svg?palette=github-dark
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
-      - name: push github-contribution-grid-snake.svg to the output branch
-        uses: crazy-max/ghaction-github-pages@v3.1.0
+
+      - uses: crazy-max/ghaction-github-pages@v3.1.0
         with:
           target_branch: output
           build_dir: dist
